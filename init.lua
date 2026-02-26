@@ -177,6 +177,9 @@ vim.o.confirm = true
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- [W]rite (save) buffer
+vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', { desc = '[W]rite (save) buffer' })
+
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
@@ -631,6 +634,7 @@ require('lazy').setup({
             javascript = {
               inlayHints = {
                 includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
@@ -641,6 +645,7 @@ require('lazy').setup({
             typescript = {
               inlayHints = {
                 includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
@@ -650,6 +655,9 @@ require('lazy').setup({
             },
           },
         },
+        cssls = {},
+        html = {},
+        emmet_ls = {},
         biome = {},
       }
 
@@ -764,12 +772,10 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function() require('luasnip.loaders.from_vscode').lazy_load() end,
+          },
         },
         opts = {},
       },
@@ -929,6 +935,7 @@ require('lazy').setup({
         'rust',
         'go',
         'jsdoc',
+        'css',
       }
       require('nvim-treesitter').install(filetypes)
       vim.api.nvim_create_autocmd('FileType', {
