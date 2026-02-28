@@ -115,6 +115,7 @@ vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
+vim.o.ruler = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -124,6 +125,7 @@ vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.o.breakindent = true
+vim.o.linebreak = true
 
 -- Save undo history
 vim.o.undofile = true
@@ -903,10 +905,15 @@ require('lazy').setup({
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
+      -- default behavior.
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function() return '%2l:%-2v' end
+      statusline.section_git = function() return '' end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_diff = function() return '' end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_fileinfo = function() return '' end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function() return '' end
 
       -- ... and there is more!
       --  Check out: https://github.com/nvim-mini/mini.nvim
