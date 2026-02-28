@@ -102,7 +102,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Set tab configuration to 4 spaces
 vim.o.expandtab = true
@@ -912,8 +912,9 @@ require('lazy').setup({
       statusline.section_diff = function() return '' end
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_fileinfo = function() return '' end
+      -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function() return '' end
+      statusline.section_location = function() return '%2l:%-2v' end
 
       -- ... and there is more!
       --  Check out: https://github.com/nvim-mini/mini.nvim
