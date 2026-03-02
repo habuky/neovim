@@ -636,7 +636,7 @@ require('lazy').setup({
                 --
                 -- But for many setups, the LSP (`ts_ls`) will work just fine
                 ts_ls = {
-                    root_dir = require('lspconfig.util').root_pattern 'package.json',
+                    root_markers = { 'package.json' },
                     single_file_support = false,
                     settings = {
                         javascript = {
@@ -664,15 +664,21 @@ require('lazy').setup({
                     },
                 },
                 denols = {
-                    root_dir = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc'),
-                    init_options = {
-                        lint = true,
-                        suggest = {
-                            imports = {
-                                hosts = {
-                                    ['https://deno.land'] = true,
-                                    ['https://cdn.skypack.dev'] = true,
-                                    ['https://esm.sh'] = true,
+                    cmd = { 'deno', 'lsp' },
+                    filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+                    root_markers = { 'deno.json', 'deno.jsonc' },
+                    settings = {
+                        deno = {
+                            enable = true,
+                            lint = true,
+                            unstable = true,
+                            suggest = {
+                                imports = {
+                                    hosts = {
+                                        ['https://deno.land'] = true,
+                                        ['https://cdn.skypack.dev'] = true,
+                                        ['https://esm.sh'] = true,
+                                    },
                                 },
                             },
                         },
