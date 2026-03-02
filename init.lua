@@ -636,6 +636,8 @@ require('lazy').setup({
                 --
                 -- But for many setups, the LSP (`ts_ls`) will work just fine
                 ts_ls = {
+                    root_dir = require('lspconfig.util').root_pattern 'package.json',
+                    single_file_support = false,
                     settings = {
                         javascript = {
                             inlayHints = {
@@ -661,10 +663,24 @@ require('lazy').setup({
                         },
                     },
                 },
+                denols = {
+                    root_dir = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc'),
+                    init_options = {
+                        lint = true,
+                        suggest = {
+                            imports = {
+                                hosts = {
+                                    ['https://deno.land'] = true,
+                                    ['https://cdn.skypack.dev'] = true,
+                                    ['https://esm.sh'] = true,
+                                },
+                            },
+                        },
+                    },
+                },
                 cssls = {},
                 html = {},
                 emmet_ls = {},
-                biome = {},
             }
 
             -- Ensure the servers and tools above are installed
@@ -754,8 +770,8 @@ require('lazy').setup({
                 -- python = { "isort", "black" },
                 --
                 -- You can use 'stop_after_first' to run the first available formatter from the list
-                javascript = { 'biome', stop_after_first = true },
-                typescript = { 'biome', stop_after_first = true },
+                javascript = { 'deno_fmt', stop_after_first = true },
+                typescript = { 'deno_fmt', stop_after_first = true },
             },
         },
     },
